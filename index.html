@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -50,18 +50,18 @@ footer{text-align:center;background:var(--dark);color:white;padding:30px;margin-
 <div class="links"><a href="#categories">الأقسام</a><a href="#about">عن المتجر</a><button class="cart-button" onclick="openCart()">السلة <span class="count" id="cartCount">0</span></button></div>
 </nav></header>
 <main>
-<div class="hero"><div><div style="color:var(--dark)">خيوط، ألوان، وتفاصيل صغيرة</div><h1>قطعة من الخيال،<br>مصنوعة بحب.</h1><p>اكتشفي عالم الكروشيه اليدوي، واختاري قطعك المفضلة من مجموعتنا.</p><a class="btn" href="#categories">اكتشفي الأقسام</a></div><div class="art">🧶</div></div>
+<div class="hero"><div><div style="color:var(--dark)">خيوط، ألوان، وتفاصيل صغيرة</div><h1>Handmade<br>صناعه يدوية</h1><p>اكتشفي عالم الكروشيه اليدوي، واختاري قطعك المفضلة من مجموعتنا.</p><a class="btn" href="#categories">اكتشفي الأقسام</a></div><div class="art">🧶</div></div>
 <section id="categories">
 <div class="heading"><h2>تسوقي حسب القسم</h2><p>اختاري القسم لتشاهدي منتجاته</p></div>
 <div class="categories">
 <button class="category active" onclick="showCategory('all',this)"><span class="symbol">✿</span><strong>كل المنتجات</strong><small>تصفحي المجموعة</small></button>
-<button class="category" onclick="showCategory('bandanas',this)"><span class="symbol">🎀</span><strong>البندانات</strong><small>أناقة بخيوط ناعمة</small></button>
-<button class="category" onclick="showCategory('bags',this)"><span class="symbol">👜</span><strong>الحقائب</strong><small>رفيقتك اليومية</small></button>
-<button class="category" onclick="showCategory('accessories',this)"><span class="symbol">🌼</span><strong>الإكسسوارات</strong><small>تفاصيل صغيرة</small></button>
-<button class="category" onclick="showCategory('toys',this)"><span class="symbol">🧸</span><strong>الدمى</strong><small>قطع لطيفة</small></button>
-<button class="category" onclick="showCategory('home',this)"><span class="symbol">🏡</span><strong>ديكور المنزل</strong><small>لمسات يدوية</small></button>
+<button class="category" onclick="showCategory('bandanas',this)"><span class="symbol">Kerchief</span><strong>البندانات</strong><small>أناقة بخيوط ناعمة</small></button>
+<button class="category" onclick="showCategory('bags',this)"><span class="symbol">bag</span><strong>الحقائب</strong><small>رفيقتك اليومية</small></button>
+<button class="category" onclick="showCategory('accessories',this)"><span class="symbol">Accessories</span><strong>الإكسسوارات</strong><small>تفاصيل صغيرة</small></button>
+<button class="category" onclick="showCategory('toys',this)"><span class="symbol">Amigurumi</span><strong>الدمى</strong><small>قطع لطيفة</small></button>
+<button class="category" onclick="showCategory('home',this)"><span class="symbol">decor</span><strong>ديكور المنزل</strong><small>لمسات يدوية</small></button>
 </div>
-<div class="heading" id="productHeading"><h2>منتجاتنا</h2><p>اختاري ما يعجبك وأضيفيه إلى سلتك</p></div>
+<div class="heading" id="productHeading"><h2>منتجاتنا</h2><p>اختار ما يعجبك وأضيفيه إلى سلتك</p></div>
 <div class="products" id="products"></div>
 </section>
 <section id="about"><div class="about"><h2>عن Crochet by Roy</h2><p>كل قطعة تُصنع يدويًا بعناية واهتمام بالتفاصيل. شكرًا لدعمك الأعمال اليدوية الصغيرة.</p></div></section>
@@ -80,7 +80,7 @@ footer{text-align:center;background:var(--dark);color:white;padding:30px;margin-
 <div class="field"><label>رقم الهاتف</label><input name="phone" type="tel" required placeholder="05 أو 06 أو 07"></div>
 <div class="field"><label>الولاية والبلدية والعنوان</label><textarea name="address" required placeholder="اكتبي عنوان التوصيل بالتفصيل"></textarea></div>
 <div class="field"><label>ملاحظات إضافية (اختياري)</label><textarea name="notes" placeholder="اللون أو المقاس أو أي تفاصيل أخرى"></textarea></div>
-<div class="payment"><strong>طريقة الدفع: عند الاستلام</strong><br>تدفعين قيمة الطلب عند وصوله إليك.</div>
+<div class="payment"><strong>طريقة الدفع: عند الاستلام</strong><br>دفع عند إستلام</div>
 <div id="checkoutSummary" class="notice"></div><button class="btn checkout" type="submit" id="submitOrder">تأكيد الطلب</button><p class="notice" id="formMessage"></p>
 </form></aside>
 <script>
