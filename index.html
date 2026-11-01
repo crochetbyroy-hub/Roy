@@ -55,11 +55,11 @@ footer{text-align:center;background:var(--dark);color:white;padding:30px;margin-
 <div class="heading"><h2>تسوقي حسب القسم</h2><p>اختاري القسم لتشاهدي منتجاته</p></div>
 <div class="categories">
 <button class="category active" onclick="showCategory('all',this)"><span class="symbol">✿</span><strong>كل المنتجات</strong><small>تصفحي المجموعة</small></button>
-<button class="category" onclick="showCategory('bandanas',this)"><span class="symbol">Kerchief</span><strong>البندانات</strong><small>أناقة بخيوط ناعمة</small></button>
-<button class="category" onclick="showCategory('bags',this)"><span class="symbol">bag</span><strong>الحقائب</strong><small>رفيقتك اليومية</small></button>
-<button class="category" onclick="showCategory('accessories',this)"><span class="symbol">Accessories</span><strong>الإكسسوارات</strong><small>تفاصيل صغيرة</small></button>
-<button class="category" onclick="showCategory('toys',this)"><span class="symbol">Amigurumi</span><strong>الدمى</strong><small>قطع لطيفة</small></button>
-<button class="category" onclick="showCategory('home',this)"><span class="symbol">decor</span><strong>ديكور المنزل</strong><small>لمسات يدوية</small></button>
+<button class="category" onclick="showCategory('bandanas',this)"><span class="symbol">Kerchief</span><strong>البندانات</strong>
+<button class="category" onclick="showCategory('bags',this)"><span class="symbol">bag</span><strong>الحقائب</strong>
+<button class="category" onclick="showCategory('accessories',this)"><span class="symbol">Accessories</span><strong>الإكسسوارات</strong>
+<button class="category" onclick="showCategory('toys',this)"><span class="symbol">Amigurumi</span><strong>الدمى</strong>
+<button class="category" onclick="showCategory('home',this)"><span class="symbol">decor</span><strong>ديكور المنزل</strong>
 </div>
 <div class="heading" id="productHeading"><h2>منتجاتنا</h2><p>اختار ما يعجبك وأضيفيه إلى سلتك</p></div>
 <div class="products" id="products"></div>
@@ -86,9 +86,9 @@ footer{text-align:center;background:var(--dark);color:white;padding:30px;margin-
 <script>
 /* أضيفي المنتجات هنا. السعر بالدينار، واستخدمي null إذا لم تحددي السعر بعد. */
 const products=[
-{id:1,name:"باندانا كروشيه",category:"bandanas",description:"باندانا يدوية، اختاري اللون المتاح.",price:null,emoji:"🎀"},
-{id:2,name:"حقيبة كروشيه",category:"bags",description:"حقيبة مصنوعة يدويًا بتفاصيل مميزة.",price:null,emoji:"👜"},
-{id:3,name:"إكسسوارات كروشيه",category:"accessories",description:"تفاصيل صغيرة تضيف لمسة خاصة.",price:null,emoji:"🌼"}
+{id:1,name:"باندانا كروشيه",category:"bandanas",description:"باندانا يدوية، اختاري اللون المتاح.",price:null,emoji:"Bandana"},
+{id:2,name:"حقيبة كروشيه",category:"bags",description:"حقيبة مصنوعة يدويًا بتفاصيل مميزة.",price:null,emoji:"bag"},
+{id:3,name:"إكسسوارات كروشيه",category:"accessories",description:"تفاصيل صغيرة تضيف لمسة خاصة.",price:null,emoji:"accessories"}
 ];
 let cart=JSON.parse(localStorage.getItem("royCart")||"[]");
 document.getElementById("year").textContent=new Date().getFullYear();
