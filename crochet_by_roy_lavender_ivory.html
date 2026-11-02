@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Crochet by Roy</title>
+<style>
+:root{--white:#fffdf8;--ivory:#f8f4eb;--lav:#d9c9ed;--lav-light:#f3edf8;--purple:#80699e;--ink:#393342;--muted:#8e8792;--line:#e9e1ec}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ivory);color:var(--ink);font-family:Georgia,"Times New Roman",serif}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+.topline{height:3px;background:var(--purple)}
+header{position:sticky;top:0;z-index:20;background:#fffdf8ed;backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.header-main{height:76px;max-width:1180px;margin:auto;padding:0 22px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center}
+.header-left,.header-right{display:flex;align-items:center;gap:18px}
+.header-left{position:relative;z-index:35}
+.header-right{justify-content:flex-end}
+.menu-wrap{position:relative;z-index:40}
+.icon-btn{border:0;background:transparent;color:var(--ink);font-size:25px;padding:5px;line-height:1}
+.logo{font: bold 36px Georgia,serif;color:var(--purple);text-decoration:none;letter-spacing:-2px}
+.logo sup{font:12px Arial;vertical-align:top}
+.cart-btn{border:1px solid var(--ink);border-radius:50%;width:42px;height:42px;background:var(--white);font:16px Georgia;position:relative}
+.cart-count{position:absolute;top:-6px;right:-5px;background:var(--purple);color:white;border-radius:50%;font:11px Arial;min-width:18px;padding:3px}
+.nav-tabs{height:55px;display:flex;justify-content:center;align-items:center;gap:clamp(28px,8vw,90px);border-top:1px solid var(--line);overflow:auto;white-space:nowrap;padding:0 16px}
+.nav-tabs button{border:0;background:none;color:var(--ink);font: bold 19px Georgia,serif;padding:12px 0}
+.nav-tabs button.active{color:var(--purple)}
+.menu-wrap{position:relative}
+.menu-pop{display:none;position:absolute;top:44px;left:0;right:auto;width:210px;background:var(--white);border:1px solid var(--line);box-shadow:0 12px 30px #55426718;z-index:100}
+.menu-pop.open{display:block}
+.menu-pop button{display:block;width:100%;min-height:48px;text-align:left;background:var(--white);border:0;border-bottom:1px solid var(--line);padding:14px 16px;color:#29252f;font:15px Arial,sans-serif;visibility:visible;opacity:1}
+.menu-pop button:hover{background:var(--lav-light)}
+main{max-width:1180px;margin:auto}
+.searchbar{margin:22px auto 10px;padding:0 22px;max-width:720px;display:none}
+.searchbar.show{display:block}
+.searchbar input{width:100%;border:1px solid var(--line);border-radius:0;padding:13px 15px;font:16px Arial;outline:none}
+.searchbar input:focus{border-color:var(--purple)}
+.view{display:none}
+.view.active{display:block}
+.section-head{font:34px Georgia,serif;margin:30px 22px 22px}
+.home-feature{padding:0 22px 45px}
+.products{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 18px}
+.card{min-width:0}
+.product-image{height:clamp(180px,42vw,390px);background:#f1ebf5;position:relative;display:grid;place-items:center;overflow:hidden}
+.product-image .emoji{font-size:clamp(60px,12vw,112px);filter:saturate(.78)}
+.product-image.bags{background:linear-gradient(145deg,#e9def2,#fffdf8)}
+.product-image.accessories{background:linear-gradient(145deg,#e9e0f1,#fffdf8)}
+.product-image.bandanas{background:linear-gradient(145deg,#f2eaf5,#fffdf8)}
+.product-image.keychains{background:linear-gradient(145deg,#e8def1,#fffdf8)}
+.product-info{padding:10px 0 0}
+.product-info h3{font:18px Arial,sans-serif;margin:0 0 7px;font-weight:400}
+.price{font:16px Arial,sans-serif;color:#222}
+.old-price{color:#999;text-decoration:line-through;margin-left:7px}
+.add{margin-top:10px;border:1px solid var(--ink);background:#fff;color:var(--ink);padding:9px 13px;font:14px Arial;width:100%}
+.add:hover{background:var(--purple);border-color:var(--purple);color:#fff}
+.collections{padding:0 22px 50px}
+.collection-row{width:100%;display:flex;align-items:center;justify-content:space-between;border:0;border-top:1px solid var(--line);border-radius:0;background:var(--white);padding:20px 5px;color:var(--ink);text-align:left;font:27px Georgia,serif}
+.collection-row:last-child{border-bottom:1px solid var(--line)}
+.collection-row span:last-child{font:25px Arial;color:var(--purple)}
+.collection-row:hover{color:var(--purple)}
+.page-toolbar{display:flex;align-items:center;justify-content:space-between;margin:25px 22px 20px}
+.page-toolbar h1{font:36px Georgia;margin:0}
+.back{border:1px solid var(--line);background:var(--white);padding:9px 14px;font:14px Arial}
+.shop-all{padding:0 22px 50px}
+.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:60px 10px;font:16px Arial}
+.info-panel{display:none;position:fixed;inset:0;z-index:50;background:#0007;align-items:center;justify-content:center;padding:20px}
+.info-panel.open{display:flex}
+.info-box{background:var(--white);width:min(420px,100%);padding:24px;position:relative}
+.info-box h2{font:25px Georgia;margin:0 0 14px;color:var(--purple)}
+.info-box p{font:15px Arial;line-height:1.7}
+.info-close{position:absolute;top:10px;right:12px;border:0;background:none;font-size:22px}
+.overlay{position:fixed;inset:0;background:#0007;z-index:60;display:none}
+.overlay.show{display:block}
+.panel{position:fixed;z-index:61;top:0;bottom:0;left:0;width:min(440px,100%);background:var(--white);padding:22px;overflow:auto;transform:translateX(-105%);transition:.3s}
+.panel.show{transform:translateX(0)}
+.panel-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:12px}
+.panel-head h2{font:25px Georgia;margin:0}
+.close{border:0;background:var(--lav-light);width:36px;height:36px;border-radius:50%}
+.cart-item{display:flex;justify-content:space-between;gap:10px;padding:15px 0;border-bottom:1px solid var(--line);font:14px Arial}
+.cart-item strong{display:block}
+.qty{display:flex;align-items:center;gap:9px;margin-top:8px}
+.qty button{border:1px solid var(--line);background:var(--white);padding:3px 10px}
+.remove{border:0;background:none;color:#a45d54}
+.total{border-top:1px solid var(--line);margin-top:15px;padding-top:15px;font: bold 15px Arial}
+.btn{width:100%;margin-top:15px;border:0;background:var(--purple);color:white;padding:13px;font:15px Arial}
+.field{margin:13px 0;font:14px Arial}
+.field label{display:block;margin-bottom:6px}
+.field input,.field textarea{width:100%;border:1px solid var(--line);padding:11px;background:white}
+.field textarea{min-height:75px}
+.payment{background:var(--lav-light);padding:12px;font:14px Arial;margin:15px 0}
+.notice{font:12px Arial;color:var(--muted);text-align:center;margin-top:12px}
+ .product-image img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.card-top{position:relative}
+.fav-toggle{position:absolute;top:10px;right:10px;border:0;border-radius:50%;width:38px;height:38px;background:#ffffffed;color:#6f5a8e;font:24px Arial;z-index:2}
+.card-actions{display:flex;gap:8px}
+.card-actions .add{flex:1}
+.details-btn{margin-top:10px;border:1px solid var(--line);background:var(--white);padding:9px 12px;font:14px Arial;color:var(--purple)}
+.product-detail{max-height:90vh;overflow:auto}
+.product-detail .product-image{height:230px;margin:12px 0}
+.product-detail .field select{width:100%;border:1px solid var(--line);padding:11px;background:#fff}
+@media(min-width:800px){.home-feature,.shop-all{padding-left:32px;padding-right:32px}.products{gap:35px 25px}}
+@media(max-width:520px){.header-main{height:66px;padding:0 14px}.logo{font-size:30px}.header-left,.header-right{gap:10px}.nav-tabs{height:50px;gap:35px;justify-content:flex-start}.nav-tabs button{font-size:17px}.section-head{font-size:29px;margin:24px 15px 18px}.home-feature,.shop-all,.collections{padding-left:15px;padding-right:15px}.products{gap:24px 12px}.product-info h3{font-size:15px}.price{font-size:14px}.product-image{height:clamp(165px,55vw,250px)}.page-toolbar{margin:22px 15px 17px}.page-toolbar h1{font-size:30px}}
+.section-head,.page-toolbar h1{color:#51445f}
+.collection-row:hover{background:#f8f2fa}
+.searchbar input,.field input,.field textarea,.field select,.product-detail .field select{background:#fffdf8;border-color:#e4d9e9;border-radius:8px}
+.add,.details-btn,.back{border-radius:8px;border-color:#d9cce3}
+.add{background:#fffdf8}
+.cart-btn{border-color:#b9a7cb}
+.info-box{border:1px solid #e9e1ec;border-radius:14px}
+.panel{border-right:1px solid var(--line)}
+.btn{border-radius:8px;background:#80699e}
+.payment{background:#f3edf8;border-radius:8px}
+</style>
+</head>
+<body>
+<div class="topline"></div>
+<header>
+  <div class="header-main">
+    <div class="header-left">
+      <div class="menu-wrap">
+        <button class="icon-btn" aria-label="More options" onclick="toggleMenu()">⋮</button>
+        <div class="menu-pop" id="menuPop">
+          <button onclick="showInfo('About Crochet by Roy','Crochet by Roy')">About</button>
+          <button onclick="showInfo('Delivery & payment','Cash on delivery')">Delivery & payment</button>
+          <button onclick="showInfo('Orders','Add products to your cart and complete the order form.')">How to order</button>
+        </div>
+      </div>
+      <button class="icon-btn" aria-label="Search" onclick="toggleSearch()">⌕</button>
+    </div>
+    <a class="logo" href="#" onclick="showView('home');return false">Crochet by Roy<sup>®</sup></a>
+    <div class="header-right">
+      <button class="icon-btn" onclick="showFavorites()" aria-label="Favorites">♡</button>
+      <button class="cart-btn" onclick="openCart()" aria-label="Cart"><span id="cartCount">0</span></button>
+    </div>
+  </div>
+  <nav class="nav-tabs">
+    <button id="tabHome" class="active" onclick="showView('home')">Home</button>
+    <button id="tabCollections" onclick="showView('collections')">Collections</button>
+    <button id="tabShop" onclick="showView('shop')">Shop All</button>
+  </nav>
+</header>
+
+<main>
+  <div class="searchbar" id="searchbar"><input id="productSearch" type="search" placeholder="Search products..." oninput="searchProducts(this.value)"></div>
+
+  <section class="view active" id="homeView">
+    <h1 class="section-head">Home</h1>
+    <div class="home-feature">
+      <div class="products" id="homeProducts"></div>
+    </div>
+  </section>
+
+  <section class="view" id="collectionsView">
+    <h1 class="section-head">Collections</h1>
+    <div class="collections">
+      <button class="collection-row" onclick="openCategory('bags')"><span>bag</span><span>＋</span></button>
+      <button class="collection-row" onclick="openCategory('accessories')"><span>Accessories</span><span>＋</span></button>
+      <button class="collection-row" onclick="openCategory('bandanas')"><span>Headband</span><span>＋</span></button>
+      <button class="collection-row" onclick="openCategory('keychains')"><span>Keychain</span><span>＋</span></button>
+    </div>
+  </section>
+
+  <section class="view" id="shopView">
+    <div class="page-toolbar"><h1>Shop All</h1></div>
+    <div class="shop-all"><div class="products" id="allProducts"></div></div>
+  </section>
+
+  <section class="view" id="categoryView">
+    <div class="page-toolbar"><h1 id="categoryTitle"></h1><button class="back" onclick="showView('collections')">← Collections</button></div>
+    <div class="shop-all"><div class="products" id="categoryProducts"></div></div>
+  </section>
+
+  <section class="view" id="searchView">
+    <div class="page-toolbar"><h1>Search</h1></div>
+    <div class="shop-all"><div class="products" id="searchProducts"></div></div>
+  </section>
+  <section class="view" id="favoritesView">
+    <div class="page-toolbar"><h1>Favorites</h1></div>
+    <div class="shop-all"><div class="products" id="favoriteProducts"></div></div>
+  </section>
+</main>
+
+<div class="info-panel" id="productModal" onclick="if(event.target===this)closeProduct()">
+  <div class="info-box product-detail">
+    <button class="info-close" onclick="closeProduct()">×</button>
+    <div id="detailImage" class="product-image"></div>
+    <h2 id="detailName"></h2>
+    <p id="detailDescription"></p>
+    <div class="field"><label>Color</label><select id="detailColor"><option>Lavender</option><option>White</option><option>Pink</option><option>Beige</option><option>Black</option><option>Custom</option></select></div>
+    <div class="field"><label>Size</label><select id="detailSize"><option>One size</option><option>Small</option><option>Medium</option><option>Large</option><option>Custom</option></select></div>
+    <div class="field"><label>Product photo</label><input type="file" id="photoUpload" accept="image/*" onchange="uploadProductPhoto(event)"><small class="notice">Upload your own product photo. It is saved in this browser.</small></div>
+    <button class="btn" id="detailAdd" onclick="addSelectedToCart()">Add to cart</button>
+  </div>
+</div>
+<div class="info-panel" id="infoPanel" onclick="if(event.target===this)closeInfo()">
+  <div class="info-box"><button class="info-close" onclick="closeInfo()">×</button><h2 id="infoTitle"></h2><p id="infoText"></p></div>
+</div>
+
+<div class="overlay" id="overlay" onclick="closePanels()"></div>
+<aside class="panel" id="cartPanel">
+  <div class="panel-head"><h2>Shopping Cart</h2><button class="close" onclick="closePanels()">×</button></div>
+  <div id="cartItems"></div><div class="total" id="cartTotal"></div>
+  <button class="btn" onclick="openCheckout()">Checkout</button><p class="notice">Cash on delivery</p>
+</aside>
+<aside class="panel" id="checkoutPanel">
+  <div class="panel-head"><h2>Checkout</h2><button class="close" onclick="closePanels()">×</button></div>
+  <form id="checkoutForm">
+    <div class="field"><label>Full name</label><input name="customer_name" required></div>
+    <div class="field"><label>Phone</label><input name="phone" type="tel" required></div>
+    <div class="field"><label>Address</label><textarea name="address" required></textarea></div>
+    <div class="field"><label>Notes (optional)</label><textarea name="notes"></textarea></div>
+    <div class="payment"><strong>Payment: Cash on delivery</strong></div>
+    <div id="checkoutSummary" class="notice"></div><button class="btn" type="submit" id="submitOrder">Confirm order</button><p class="notice" id="formMessage"></p>
+  </form>
+</aside>
+
+<script>
+const products = [
+  {id:1,name:"Crochet Headband",category:"bandanas",description:"Handmade crochet headband.",price:null,emoji:"🎀",photo:"",colors:["Lavender","White","Pink","Beige"],sizes:["One size","Custom"]},
+  {id:2,name:"Crochet Bag",category:"bags",description:"Handmade crochet bag.",price:null,emoji:"👜",photo:"",colors:["Lavender","White","Pink","Beige","Black"],sizes:["Small","Medium","Large","Custom"]},
+  {id:3,name:"Crochet Accessories",category:"accessories",description:"Handmade crochet accessories.",price:null,emoji:"🌼",photo:"",colors:["Lavender","White","Pink","Beige"],sizes:["One size","Custom"]}
+];
+let cart = JSON.parse(localStorage.getItem("royCart") || "[]");
+try{const savedPhotos=JSON.parse(localStorage.getItem("royProductPhotos")||"[]");savedPhotos.forEach(s=>{const p=products.find(x=>x.id===s.id);if(p&&s.photo)p.photo=s.photo;});}catch(e){}
+let currentCategory = "all";
+const categoryTitles = {bags:"bag",accessories:"Accessories",bandanas:"Headband",keychains:"Keychain"};
+const categoryNames = {bags:"bag",accessories:"Accessories",bandanas:"Headband",keychains:"Keychain"};
+
+function shuffled(list){return [...list].sort(()=>Math.random()-.5)}
+let favorites = JSON.parse(localStorage.getItem("royFavorites") || "[]");
+let selectedProductId = null;
+function photoMarkup(p){
+  return p.photo ? `<img src="${p.photo}" alt="${p.name}">` : `<span class="emoji">${p.emoji||"🧶"}</span>`;
+}
+function card(p){
+  const liked=favorites.includes(p.id);
+  return `<article class="card"><div class="card-top"><div class="product-image ${p.category}">${photoMarkup(p)}</div><button class="fav-toggle" aria-label="Favorite" onclick="toggleFavorite(${p.id})">${liked?"♥":"♡"}</button></div><div class="product-info"><h3>${p.name}</h3><div class="price">${p.price===null?"Price on request":money(p.price)}</div><div class="card-actions"><button class="details-btn" onclick="openProduct(${p.id})">View</button><button class="add" onclick="quickAdd(${p.id})">Add to cart</button></div></div></article>`;
+}
+function renderProducts(target,list){
+  const el=document.getElementById(target);
+  el.innerHTML=list.length?list.map(card).join(""):'<div class="empty">No products yet</div>';
+}
+function toggleFavorite(id){
+  favorites=favorites.includes(id)?favorites.filter(x=>x!==id):[...favorites,id];
+  localStorage.setItem("royFavorites",JSON.stringify(favorites));
+  refreshVisible();
+}
+function refreshVisible(){
+  if(document.getElementById("homeView").classList.contains("active"))renderProducts("homeProducts",shuffled(products));
+  if(document.getElementById("shopView").classList.contains("active"))renderProducts("allProducts",shuffled(products));
+  if(document.getElementById("categoryView").classList.contains("active"))renderProducts("categoryProducts",shuffled(products.filter(p=>p.category===currentCategory)));
+  if(document.getElementById("favoritesView").classList.contains("active"))renderProducts("favoriteProducts",products.filter(p=>favorites.includes(p.id)));
+}
+function showFavorites(){
+  document.querySelectorAll(".view").forEach(x=>x.classList.remove("active"));
+  document.getElementById("favoritesView").classList.add("active");
+  document.querySelectorAll(".nav-tabs button").forEach(x=>x.classList.remove("active"));
+  renderProducts("favoriteProducts",products.filter(p=>favorites.includes(p.id)));
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function openProduct(id){
+  selectedProductId=id;
+  const p=products.find(x=>x.id===id);
+  document.getElementById("detailName").textContent=p.name;
+  document.getElementById("detailDescription").textContent=p.description;
+  document.getElementById("detailImage").className="product-image "+p.category;
+  document.getElementById("detailImage").innerHTML=photoMarkup(p);
+  const color=document.getElementById("detailColor"),size=document.getElementById("detailSize");
+  color.innerHTML=(p.colors||["Custom"]).map(x=>`<option>${x}</option>`).join("");
+  size.innerHTML=(p.sizes||["One size"]).map(x=>`<option>${x}</option>`).join("");
+  document.getElementById("photoUpload").value="";
+  document.getElementById("productModal").classList.add("open");
+}
+function closeProduct(){document.getElementById("productModal").classList.remove("open")}
+function uploadProductPhoto(event){
+  const file=event.target.files&&event.target.files[0];if(!file||!selectedProductId)return;
+  if(!file.type.startsWith("image/")){alert("Please choose an image.");return;}
+  const reader=new FileReader();
+  reader.onload=()=>{
+    const img=new Image();
+    img.onload=()=>{
+      const canvas=document.createElement("canvas"),scale=Math.min(1,1000/Math.max(img.width,img.height));
+      canvas.width=Math.round(img.width*scale);canvas.height=Math.round(img.height*scale);
+      canvas.getContext("2d").drawImage(img,0,0,canvas.width,canvas.height);
+      const p=products.find(x=>x.id===selectedProductId);p.photo=canvas.toDataURL("image/jpeg",.78);
+      try{localStorage.setItem("royProductPhotos",JSON.stringify(products.map(x=>({id:x.id,photo:x.photo}))));}catch(e){alert("Image is too large for browser storage. Try a smaller photo.");return;}
+      document.getElementById("detailImage").innerHTML=photoMarkup(p);refreshVisible();
+    };
+    img.src=reader.result;
+  };
+  reader.readAsDataURL(file);
+}
+function quickAdd(id){selectedProductId=id;addSelectedToCart()}
+function addSelectedToCart(){
+  const p=products.find(x=>x.id===selectedProductId);if(!p)return;
+  const color=document.getElementById("detailColor").value||"Lavender";
+  const size=document.getElementById("detailSize").value||"One size";
+  const old=cart.find(x=>x.id===p.id&&x.color===color&&x.size===size);
+  if(old)old.quantity++;else cart.push({...p,quantity:1,color,size});
+  saveCart();closeProduct();
+}
+function money(v){return new Intl.NumberFormat("en-DZ").format(v)+" DZD"}
+function showView(view){
+  document.querySelectorAll(".view").forEach(x=>x.classList.remove("active"));
+  document.getElementById(view+"View").classList.add("active");
+  ["home","collections","shop"].forEach(x=>document.getElementById("tab"+x[0].toUpperCase()+x.slice(1)).classList.toggle("active",x===view));
+  document.getElementById("searchbar").classList.remove("show");
+  document.getElementById("productSearch").value="";
+  document.getElementById("menuPop").classList.remove("open");
+  window.scrollTo({top:0,behavior:"smooth"});
+  if(view==="home")renderProducts("homeProducts",shuffled(products));
+  if(view==="shop")renderProducts("allProducts",shuffled(products));
+}
+function openCategory(category){
+  currentCategory=category;
+  document.querySelectorAll(".view").forEach(x=>x.classList.remove("active"));
+  document.getElementById("categoryView").classList.add("active");
+  document.getElementById("categoryTitle").textContent=categoryTitles[category]||"Collections";
+  renderProducts("categoryProducts",shuffled(products.filter(p=>p.category===category)));
+  document.querySelectorAll(".nav-tabs button").forEach(x=>x.classList.remove("active"));
+  document.getElementById("tabCollections").classList.add("active");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function toggleSearch(){
+  const bar=document.getElementById("searchbar");
+  bar.classList.toggle("show");
+  if(bar.classList.contains("show"))document.getElementById("productSearch").focus();
+}
+function searchProducts(q){
+  if(!q.trim()){document.getElementById("searchView").classList.remove("active");return;}
+  document.querySelectorAll(".view").forEach(x=>x.classList.remove("active"));
+  document.getElementById("searchView").classList.add("active");
+  const query=q.toLowerCase();
+  renderProducts("searchProducts",products.filter(p=>(p.name+" "+p.category+" "+p.description).toLowerCase().includes(query)));
+}
+function toggleMenu(){document.getElementById("menuPop").classList.toggle("open")}
+function showInfo(title,body){
+  document.getElementById("infoTitle").textContent=title;
+  document.getElementById("infoText").textContent=body;
+  document.getElementById("infoPanel").classList.add("open");
+  document.getElementById("menuPop").classList.remove("open");
+}
+function closeInfo(){document.getElementById("infoPanel").classList.remove("open")}
+function addToCart(id){
+  const p=products.find(x=>x.id===id),old=cart.find(x=>x.id===id);
+  if(old)old.quantity++;else cart.push({...p,quantity:1});
+  saveCart();alert("Added to cart");
+}
+function saveCart(){localStorage.setItem("royCart",JSON.stringify(cart));renderCart()}
+function renderCart(){
+  document.getElementById("cartCount").textContent=cart.reduce((s,p)=>s+p.quantity,0);
+  const box=document.getElementById("cartItems");
+  if(!cart.length){box.innerHTML='<div class="empty">Your cart is empty</div>';document.getElementById("cartTotal").textContent="";return;}
+  box.innerHTML=cart.map(p=>`<div class="cart-item"><div><strong>${p.name}</strong><div>${p.color||""} ${p.size||""}</div><div>${p.price===null?"Price on request":money(p.price)}</div><div class="qty"><button onclick="changeQty(${p.id},1)">+</button><span>${p.quantity}</span><button onclick="changeQty(${p.id},-1)">−</button><button class="remove" onclick="removeItem(${p.id})">Remove</button></div></div></div>`).join("");
+  const unknown=cart.some(p=>p.price===null),total=cart.reduce((s,p)=>s+(p.price||0)*p.quantity,0);
+  document.getElementById("cartTotal").textContent=unknown?"Total: confirmed after review":"Total: "+money(total);
+}
+function changeQty(id,n){const p=cart.find(x=>x.id===id);if(!p)return;p.quantity+=n;if(p.quantity<=0)removeItem(id);else saveCart()}
+function removeItem(id){cart=cart.filter(p=>p.id!==id);saveCart()}
+function openCart(){closePanels();document.getElementById("overlay").classList.add("show");document.getElementById("cartPanel").classList.add("show")}
+function openCheckout(){
+  if(!cart.length){alert("Your cart is empty");return;}
+  closePanels();document.getElementById("overlay").classList.add("show");document.getElementById("checkoutPanel").classList.add("show");
+  document.getElementById("checkoutSummary").textContent="Items: "+cart.reduce((s,p)=>s+p.quantity,0);
+}
+function closePanels(){document.getElementById("overlay").classList.remove("show");document.querySelectorAll(".panel").forEach(p=>p.classList.remove("show"))}
+
+const EMAILJS_PUBLIC_KEY="YOUR_PUBLIC_KEY";
+const EMAILJS_SERVICE_ID="YOUR_SERVICE_ID";
+const EMAILJS_TEMPLATE_ID="YOUR_TEMPLATE_ID";
+document.getElementById("checkoutForm").addEventListener("submit",async function(e){
+  e.preventDefault();if(!cart.length)return;
+  const button=document.getElementById("submitOrder"),message=document.getElementById("formMessage");
+  if([EMAILJS_PUBLIC_KEY,EMAILJS_SERVICE_ID,EMAILJS_TEMPLATE_ID].some(x=>x.startsWith("YOUR_"))){message.textContent="Email service setup is required before orders can be sent.";return;}
+  const data=new FormData(this);
+  const details=cart.map(p=>p.name+" | "+(p.color||"")+"/"+(p.size||"")+" | Qty: "+p.quantity+" | Price: "+(p.price===null?"To be confirmed":money(p.price))).join("\n");
+  const params={customer_name:data.get("customer_name"),phone:data.get("phone"),address:data.get("address"),notes:data.get("notes")||"None",order_details:details,total:"To be confirmed",payment_method:"Cash on delivery"};
+  button.disabled=true;button.textContent="Sending...";
+  try{
+    await emailjs.send(EMAILJS_SERVICE_ID,EMAILJS_TEMPLATE_ID,params);
+    cart=[];saveCart();this.reset();message.textContent="Order sent successfully.";button.textContent="Confirmed";
+  }catch(err){console.error(err);message.textContent="Could not send order. Please try again.";button.disabled=false;button.textContent="Confirm order";}
+});
+renderCart();renderProducts("homeProducts",shuffled(products));renderProducts("allProducts",shuffled(products));
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>if(!"YOUR_PUBLIC_KEY".startsWith("YOUR_"))emailjs.init({publicKey:"YOUR_PUBLIC_KEY"});</script>
+</body>
+</html>
